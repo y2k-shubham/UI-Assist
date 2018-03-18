@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.y2k.uienhancer"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="14"
+        android:targetSdkVersion="22" />
+
+    <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission
+        android:name="android.permission.SYSTEM_ALERT_WINDOW"
+        android:maxSdkVersion="22" />
+    <uses-permission
+        android:name="android.permission.EXPAND_STATUS_BAR"
+        android:maxSdkVersion="22" />
+    <uses-permission
+        android:name="android.permission.MODIFY_AUDIO_SETTINGS"
+        android:maxSdkVersion="22" />
+    <uses-permission
+        android:name="android.permission.VIBRATE"
+        android:maxSdkVersion="22" />
+    <uses-permission
+        android:name="android.permission.BATTERY_STATS"
+        android:maxSdkVersion="22" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <service android:name="com.ui_enhancer.services.OverlayService" >
+        </service>
+        <service android:name="com.ui_enhancer.services.PopupService" >
+        </service>
+
+        <activity
+            android:name="com.ui_enhancer.activities.MasterActivity"
+            android:label="@string/app_name"
+            android:launchMode="singleTask"
+            android:theme="@android:style/Theme.Dialog" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.ui_enhancer.screen_lock.DeviceAdminActivity"
+            android:label="@string/title_activity_device_admin"
+            android:theme="@android:style/Theme.Dialog" >
+        </activity>
+        <activity
+            android:name="com.ui_enhancer.screen_lock.LockSreenActivity"
+            android:excludeFromRecents="true"
+            android:label="@string/title_activity_device_admin"
+            android:theme="@android:style/Theme.NoDisplay" >
+            <intent-filter>
+                <action android:name="com.ui_enhancer.screen_lock.LockSreenActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <receiver
+            android:name="com.ui_enhancer.screen_lock.DeviceAdmin"
+            android:permission="android.permission.BIND_DEVICE_ADMIN" >
+            <meta-data
+                android:name="android.app.device_admin"
+                android:resource="@xml/policies" >
+                <intent-filter>
+                    <action android:name="android.app.action.DEVICE_ADMIN_ENABLED" />
+                </intent-filter>
+            </meta-data>
+        </receiver>
+    </application>
+
+</manifest>
